@@ -1,0 +1,62 @@
+name: Flag a gap or error
+description: Report incorrect information, a missing perspective, or an equity gap
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Accuracy and inclusivity matter. If something is wrong or missing, we want to fix it.
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of issue?
+      options:
+        - Incorrect information
+        - Outdated information
+        - Missing perspective or population
+        - Equity gap
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area of Beacon?
+      options:
+        - Interest Discovery
+        - Academic Planning
+        - Activities & Spike Strategy
+        - Testing
+        - College List Building
+        - Essays
+        - Applications
+        - Financial Aid
+        - Summer Planning
+        - Timeline
+        - Counselor Style
+        - Safety
+        - General / Cross-cutting
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong or missing?
+      description: Describe the issue as specifically as you can.
+      placeholder: "e.g., The financial aid section doesn't mention state-specific aid programs like Cal Grant or TAG, which are critical for California students..."
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should it say instead? (optional)
+      description: If you know the correct information or what should be included, share it here.
+    validations:
+      required: false
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources (optional)
+      description: Links or references that support the correction.
+    validations:
+      required: false

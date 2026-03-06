@@ -1,0 +1,52 @@
+name: Enrich a skill
+description: Suggest a framework, technique, or knowledge area that would make Beacon better
+labels: ["enrichment"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You don't need to edit any files — just describe your idea clearly and we'll handle the rest.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area of Beacon?
+      options:
+        - Interest Discovery
+        - Academic Planning
+        - Activities & Spike Strategy
+        - Testing
+        - College List Building
+        - Essays
+        - Applications
+        - Financial Aid
+        - Summer Planning
+        - Timeline
+        - Counselor Style
+        - Safety
+        - General / Cross-cutting
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What knowledge or framework should we add?
+      description: Describe the technique, framework, or information you think Beacon should include.
+      placeholder: "e.g., The Strong Interest Inventory is widely used in career counseling and could complement the Holland Code framework in the discover command..."
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would this help students?
+      description: How would this make the counseling experience better?
+      placeholder: "e.g., It gives students a more nuanced view of their interests beyond the six Holland types..."
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or references (optional)
+      description: Links, papers, books, or professional experience that support this suggestion.
+      placeholder: "e.g., https://example.com/research-paper, or 'Based on 10 years as a school counselor...'"
+    validations:
+      required: false

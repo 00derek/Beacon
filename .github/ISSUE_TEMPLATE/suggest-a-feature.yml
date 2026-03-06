@@ -1,0 +1,52 @@
+name: Suggest a feature
+description: Propose new functionality or an improvement to an existing command
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You don't need to edit any files — just describe your idea clearly and we'll handle the rest.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area of Beacon?
+      options:
+        - Interest Discovery
+        - Academic Planning
+        - Activities & Spike Strategy
+        - Testing
+        - College List Building
+        - Essays
+        - Applications
+        - Financial Aid
+        - Summer Planning
+        - Timeline
+        - Counselor Style
+        - Safety
+        - General / Cross-cutting
+        - New command idea
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What's your idea?
+      description: Describe what you'd like Beacon to do differently or add.
+      placeholder: "e.g., Students should be able to choose between different counselor personalities — some want a direct coach, others want a patient guide..."
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who would this help?
+      description: What kind of student or situation would benefit from this?
+      placeholder: "e.g., Students who feel overwhelmed by too many direct questions might prefer a gentler approach..."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Any additional context? (optional)
+      description: Examples, screenshots, links, or anything else that helps explain your idea.
+    validations:
+      required: false
