@@ -8,10 +8,32 @@ Use `references/admissions-knowledge.md` for testing landscape, SAT vs ACT compa
 
 Collect the student's testing baseline. Ask one question at a time:
 
-1. "Have you taken the PSAT? If so, what was your score?"
-2. "Have you taken a practice SAT or practice ACT?" (If yes: "What were the scores?")
-3. "Have you taken any official SAT or ACT?" (If yes: "Scores and dates?")
-4. "Have you taken or are you planning to take any AP exams?"
+1. "Have you taken the PSAT? (pick one)"
+   1. Yes — I know my score
+   2. Yes — don't remember the score
+   3. No, haven't taken it
+   (If yes with score, ask: "What was the score?")
+
+2. "Have you taken a practice SAT or practice ACT? (pick one)"
+   1. Practice SAT — I know the score
+   2. Practice ACT — I know the score
+   3. Both — I know the scores
+   4. Yes but don't remember scores
+   5. No, haven't taken either
+   (If yes with scores, ask for the scores)
+
+3. "Have you taken any official SAT or ACT? (pick one)"
+   1. Official SAT
+   2. Official ACT
+   3. Both
+   4. Not yet
+   (If yes, ask: "Scores and dates?")
+
+4. "Have you taken or are you planning to take any AP exams? (pick one)"
+   1. Already taken some — let me tell you which
+   2. Planning to take some this year
+   3. Both — taken some and planning more
+   4. Not taking any APs
 
 Cross-reference with grade level from state to determine urgency:
 - **Sophomore or earlier**: Exploratory. No urgency. Frame as "getting a baseline."

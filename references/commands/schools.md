@@ -8,11 +8,44 @@ Use `references/admissions-knowledge.md` for school type comparison matrix, holi
 
 Collect the student's priorities through open-ended questions. Ask one at a time:
 
-1. **Size**: "What size school feels right to you? Small (under 3,000 students — you'll know people in your classes), medium (3,000-10,000 — balance of community and options), or large (10,000+ — huge range of majors, clubs, and anonymity)? Or not sure yet?"
-2. **Location**: "Where do you want to be? Close to home, a specific region, or open to anywhere? Urban, suburban, or rural campus? Does weather matter to you?"
-3. **What matters most**: "What do you want your college experience to feel like? Think about: small seminar classes vs. big lectures, research opportunities, sports culture, Greek life, specific programs, campus vibe, diversity, study abroad."
-4. **Schools on radar**: "Are there any schools you're already thinking about? Even if it's just a vibe — 'I liked the campus' or 'my cousin went there' counts."
-5. **Budget**: "I want to make sure we're realistic about cost. Is financial aid a major factor, are you looking for merit scholarships, or is cost not the primary concern?" Respect privacy — don't push if the student is uncomfortable. Note: even families who think they can't afford private schools are sometimes surprised by financial aid. "Some private schools with big endowments can actually be cheaper than state schools after aid. Let's not rule anything out yet."
+1. **Size**: "What size school feels right to you? (pick one)"
+   1. Small (under 3,000) — you'll know people in your classes
+   2. Medium (3,000-10,000) — balance of community and options
+   3. Large (10,000+) — huge range of majors, clubs, and anonymity
+   4. Not sure yet
+
+2. **Location**: "Where do you want to be? (pick one for distance, one for setting)"
+
+   Distance:
+   1. Close to home
+   2. A few hours away
+   3. Anywhere in the country
+   4. Open to it — no strong preference
+
+   Setting:
+   1. Urban — in a city
+   2. Suburban — near a city
+   3. Rural — college-town feel
+   4. No preference
+
+3. **What matters most**: "What do you want your college experience to feel like? (pick your top 3, e.g. 1,4,6)"
+   1. Small seminar classes with discussion
+   2. Big university energy — sports, Greek life, school spirit
+   3. Research opportunities — labs, fieldwork, faculty mentorship
+   4. Strong career placement and internships
+   5. Diversity — different backgrounds and perspectives
+   6. Study abroad options
+   7. Specific program or major (tell me which)
+   8. Something else — tell me what
+
+4. **Schools on radar**: "Are there any schools you're already thinking about? Even if it's just a vibe — 'I liked the campus' or 'my cousin went there' counts." (keep open-ended)
+
+5. **Budget**: "How much is cost a factor? (pick one)"
+   1. Major factor — need significant financial aid or scholarships
+   2. Important — looking for merit scholarships and reasonable cost
+   3. A consideration but not the top priority
+   4. Not the primary concern
+   Respect privacy — don't push if the student is uncomfortable. Note: "Some private schools with big endowments can actually be cheaper than state schools after aid. Let's not rule anything out yet."
 
 If the student already has preferences in state from a previous session, pull them: "Last time, you mentioned you liked [X]. Still true?"
 
@@ -30,7 +63,13 @@ Briefly walk through the major school types using the comparison matrix from `re
 | **Liberal Arts College** | Small | Small seminars (10-25) | Wants mentorship, intellectual exploration |
 | **Art / Design School** | Small-Medium | Very small, studio-based | Creative career path, portfolio-driven |
 
-After presenting, ask: "Which of these feels most like what you're looking for? And is there anything that's definitely NOT what you want?"
+After presenting, ask: "Which of these feels most like what you're looking for? (pick one or two, e.g. 1,4) And is there any type that's definitely NOT what you want?"
+1. Ivy / Elite Private
+2. Top Tech
+3. Large State University
+4. Liberal Arts College
+5. Art / Design School
+6. Not sure — still figuring it out
 
 Help the student understand "fit": "Fit isn't about prestige — it's about where you'll actually thrive. A student who wants close faculty mentorship might be miserable at a 50,000-student university, even if it's highly ranked. And a student who wants lots of major options might feel constrained at a small liberal arts college. Neither is better — it's about what works for you."
 

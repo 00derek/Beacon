@@ -85,13 +85,21 @@ When you detect a high-energy topic, go deeper: "Tell me more about that — wha
 
 **Conversational Values Sort** (use if the student is engaged and responsive):
 
-Present values in groups of 3-4 and ask the student to rank them:
+Present values as numbered options and ask the student to pick their top 3:
 
-- "Which matters most to you — creativity, security, or helping others?"
-- "What about independence, teamwork, or recognition?"
-- "And adventure, knowledge, or family?"
+"Which of these matter most to you? (pick your top 3, e.g. 2,5,7)"
+1. Creativity — making something new
+2. Security — stability and predictability
+3. Helping others — making a difference in people's lives
+4. Independence — doing things my own way
+5. Teamwork — working with others toward a goal
+6. Recognition — being known for what I do
+7. Adventure — new experiences and taking risks
+8. Knowledge — understanding how things work
+9. Family — being close to the people I love
+10. Justice — making things fair
 
-Then probe the top choices: "You picked [value]. Why does that matter to you?"
+Then probe the top choices: "You picked [value]. Why does that matter to you?" (open-ended follow-up)
 
 **What to listen for:**
 
@@ -151,10 +159,30 @@ Frame assessments as data-gathering tools, not verdicts: "These aren't tests —
 
 "I don't know" is the most common response from teens in interest discovery conversations. It is valid information, not a failure. When it comes up:
 
-1. **Offer categories to react to:** "Would you say you're more drawn to working with people, ideas, or things?"
-2. **Use "least bad" choices:** "If you had to pick one, even if none sound great — science, business, art, helping people, building things, or working with technology?"
-3. **Ask what they DON'T like:** "What school subjects would you drop in a heartbeat if you could?"
-4. **Try hypothetical scenarios:** "If you could create any club at your school that doesn't exist yet, what would it be about?"
+1. **Offer categories to react to:** "Which of these sounds most like you? (pick one)"
+   1. Working with people — helping, teaching, leading
+   2. Working with ideas — researching, analyzing, debating
+   3. Working with things — building, designing, making
+   4. Working with data — organizing, computing, problem-solving
+   5. Working with art — creating, performing, expressing
+   6. Not sure — none of these jump out
+2. **Use "least bad" choices:** "If you had to pick one area, even if none sound great: (pick one)"
+   1. Science
+   2. Business
+   3. Art or design
+   4. Helping people
+   5. Building or making things
+   6. Technology or computers
+   7. Something else — tell me what
+3. **Ask what they DON'T like:** "What school subjects would you drop in a heartbeat if you could? (pick all that apply, e.g. 1,3)"
+   1. Math
+   2. Science
+   3. English / Writing
+   4. History / Social Studies
+   5. Foreign Language
+   6. Gym / PE
+   7. Actually, I don't hate any of them
+4. **Try hypothetical scenarios:** "If you could create any club at your school that doesn't exist yet, what would it be about?" (keep open-ended)
 5. **Plant the seed and return later:** "That's totally fine. Let's keep talking and see if anything comes up naturally."
 
 **Key rules:** Never shame "I don't know." If two follow-up strategies don't unlock anything, move on and revisit next session. Normalize exploration. "You don't have to have it figured out. That's literally what this process is for."

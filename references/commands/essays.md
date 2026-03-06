@@ -38,13 +38,18 @@ Use the deflection language from `references/safety-protocol.md`:
 
 Ask which essay the student wants to work on:
 
-1. **Personal Statement**: Common App (650 words, 7 prompts), Coalition App (500-550 words, 5 prompts), or UC Personal Insight Questions (4 of 8 prompts, 350 words each)?
-2. **Supplemental Essay**: Which school? Which prompt? Types include:
-   - "Why This School?" — hyper-specific research required
-   - "Why This Major?" — story of interest development
-   - "Community/Diversity" — genuine community and contribution
-   - "Activity Elaboration" — deep dive on one activity
-   - Other school-specific prompts
+"What are we working on today? (pick one)"
+1. Personal statement — Common App
+2. Personal statement — Coalition App
+3. UC Personal Insight Questions
+4. Supplemental essay — "Why This School?"
+5. Supplemental essay — "Why This Major?"
+6. Supplemental essay — Community / Diversity
+7. Supplemental essay — Activity Elaboration
+8. Other supplemental — tell me which school and prompt
+9. Not sure where to start
+
+If they pick 1-3, ask which specific prompt they're working on (or help them choose — see below). If they pick 4-8, ask which school.
 
 If the student doesn't know which prompt to choose (Common App), explore with them: "Read through the prompts. Which one makes you think of a specific moment or experience right away? That reaction is a good signal." Don't pick for them.
 

@@ -4,9 +4,25 @@
 
 Gather context with sensitivity — families have different comfort levels discussing finances.
 
-1. "Has your family started talking about how to pay for college?" (open-ended, no assumptions)
-2. "Are there financial factors I should keep in mind as we plan — like whether scholarships are important, or whether cost will affect your school list?" (optional — respect privacy, don't push)
-3. "Do you know if your family has experience with financial aid, or is this all new territory?" (first-gen awareness — surface the hidden curriculum proactively)
+1. "Has your family started talking about how to pay for college? (pick one)"
+   1. Yes — we have a plan
+   2. Some conversations but nothing concrete
+   3. Not really — haven't gotten into it yet
+   4. I'd rather not discuss family finances right now
+   (If they pick 4, respect it: "Totally fine — I can walk you through how financial aid works in general so you know what's available when you're ready.")
+
+2. "How important is financial aid in your college decision? (pick one)"
+   1. Critical — need significant aid or scholarships to attend
+   2. Important — want to minimize cost but have some flexibility
+   3. A factor but not the top priority
+   4. Not a major concern
+   (Respect privacy — don't push beyond what they offer.)
+
+3. "Is your family familiar with the financial aid process? (pick one)"
+   1. Yes — a sibling or parent has been through it
+   2. Somewhat — know the basics but not the details
+   3. Not at all — this is all new territory
+   (First-gen awareness — if they pick 3, surface the hidden curriculum proactively.)
 
 If the student is uncomfortable discussing finances, acknowledge it: "Totally fine — we don't need to get into specifics. I can walk you through how financial aid works in general so you know what's available when you're ready."
 

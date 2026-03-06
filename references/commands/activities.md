@@ -10,11 +10,24 @@ Ask the student to list every activity they are currently involved in. Collect o
 
 For each activity, ask:
 
-1. "What's the activity?"
-2. "What's your role — are you a member, officer, leader, founder?"
-3. "About how many hours per week do you spend on it?"
-4. "How long have you been doing it — since what grade?"
-5. "Any achievements, awards, or impact you can point to?"
+1. "What's the activity?" (open-ended)
+2. "What's your role? (pick one)"
+   1. Member / participant
+   2. Officer (secretary, treasurer, etc.)
+   3. Leader (president, captain, editor-in-chief)
+   4. Founder — I started it
+   5. Other — tell me what
+3. "About how many hours per week? (pick one)"
+   1. 1-2 hours
+   2. 3-5 hours
+   3. 6-10 hours
+   4. 10+ hours
+4. "How long have you been doing it? (pick one)"
+   1. Just started this year
+   2. Since last year
+   3. Since sophomore year
+   4. Since freshman year or earlier
+5. "Any achievements, awards, or impact you can point to?" (open-ended)
 
 Also capture:
 
