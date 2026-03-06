@@ -1,0 +1,54 @@
+name: Share an experience
+description: Tell us what worked or didn't when you used Beacon
+labels: ["experience"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Your experience using Beacon is one of the most valuable forms of feedback. There are no wrong answers here.
+  - type: dropdown
+    id: role
+    attributes:
+      label: I'm a...
+      options:
+        - Student
+        - Parent / Guardian
+        - School counselor
+        - Teacher / Educator
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which command or area?
+      options:
+        - Kickoff (profile setup)
+        - Discover (interest exploration)
+        - Plan (academic planning)
+        - Activities (extracurricular strategy)
+        - Testing (SAT/ACT/AP)
+        - Schools (college list building)
+        - Essays (essay coaching)
+        - Apply (application strategy)
+        - Financial (financial aid)
+        - Summer (summer planning)
+        - Review (progress check)
+        - General / Overall experience
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: What happened?
+      description: Describe what you experienced — what worked, what felt off, what surprised you.
+      placeholder: "e.g., The discover command asked great questions but moved too fast for me. I needed more time to think between questions..."
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would have been better? (optional)
+      description: If you have ideas for how it could improve, share them here.
+    validations:
+      required: false
