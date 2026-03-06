@@ -240,6 +240,17 @@ beacon/
 
 ---
 
+## Disclaimer
+
+Beacon is an AI tool, not a professional counselor, financial advisor, or legal advisor. The information and guidance it provides are for educational purposes only and should not be relied upon as professional advice.
+
+- **Not a substitute for professional guidance.** Always consult your school counselor, a licensed college admissions consultant, or a qualified financial advisor for important decisions.
+- **No guarantee of accuracy.** Beacon may produce outdated, incomplete, or incorrect information. Always verify deadlines, admission requirements, financial aid details, and school policies through official sources.
+- **No liability.** The creators of Beacon are not responsible for any decisions made or outcomes resulting from its use.
+- **Intended for supplemental use.** Beacon is designed to support — not replace — the guidance of parents, teachers, school counselors, and other trusted adults.
+
+By using Beacon, you acknowledge that it is an AI tool with inherent limitations and that all important decisions should be independently verified.
+
 ## License
 
 MIT
