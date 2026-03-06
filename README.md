@@ -39,15 +39,22 @@ cd beacon
 
 Or download it as a ZIP and unzip.
 
-2. Activate Beacon by renaming the skill file:
+2. Activate Beacon for your AI tool:
 
 ```bash
-mv SKILL.md CLAUDE.md
+# Claude Code
+cp SKILL.md CLAUDE.md
+
+# Gemini CLI
+cp SKILL.md GEMINI.md
+
+# OpenAI Codex CLI
+cp SKILL.md AGENTS.md
 ```
 
-3. Open the folder in Claude Code and say `kickoff`.
+3. Open the folder in your AI tool and say `kickoff`.
 
-Requires any paid Claude plan. Also works with Claude Code (terminal), Cursor, or any environment with file system access.
+Requires a paid plan for your chosen AI tool. Works with Claude Code, Gemini CLI, OpenAI Codex CLI, Cursor, or any AI coding environment with file system access.
 
 ---
 
@@ -205,7 +212,7 @@ Beacon checks whether you have a narrative thread (from `discover` and `activiti
 
 ```text
 beacon/
-├── SKILL.md                            # Core skill -- rename to CLAUDE.md to activate
+├── SKILL.md                            # Core skill -- copy to CLAUDE.md, GEMINI.md, or AGENTS.md to activate
 ├── README.md                           # This file
 ├── VERSIONS.md                         # Version roadmap
 ├── LICENSE                             # MIT License
