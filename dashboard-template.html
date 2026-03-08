@@ -470,6 +470,7 @@ window.BEACON_DATA = window.BEACON_DATA || {
     gpaUnweighted: "3.7",
     gpaWeighted: "4.1",
     counselorStyle: "Guide",
+    academicTrack: "Engineering",
     currentSemester: "Spring",
     targetGradYear: "2027"
   },
@@ -659,10 +660,7 @@ window.BEACON_DATA = window.BEACON_DATA || {
     html += '</div></div></div></section>';
 
     /* --- Stats Block --- */
-    var academicTrack = "";
-    if (p.counselorStyle && p.counselorStyle !== "Guide") {
-      academicTrack = p.counselorStyle;
-    }
+    var academicTrack = p.academicTrack || "Not yet set";
     var gpaDisplay = "";
     if (p.gpaUnweighted) {
       gpaDisplay = p.gpaUnweighted;

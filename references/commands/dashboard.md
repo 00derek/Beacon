@@ -29,6 +29,7 @@ window.BEACON_DATA = {
     gpaUnweighted: "",
     gpaWeighted: "",
     counselorStyle: "",
+    academicTrack: "",
     currentSemester: "",
     targetGradYear: ""
   },
