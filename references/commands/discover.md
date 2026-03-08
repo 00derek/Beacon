@@ -4,6 +4,12 @@ Load `references/elicitation-frameworks.md` for the full six-phase elicitation a
 
 This workflow uses a conversational approach grounded in Motivational Interviewing. Ask one question at a time. Wait for the student's response before asking the next. Attend to energy changes, not just content.
 
+### Session Chunking
+
+The discover workflow has 6 phases. Each phase is a chapter. At the end of each phase, show a progress pulse and offer a stopping point. If the student stops mid-workflow, save completed phases to `counseling_state.md` (Interest Discovery section — note which phases are complete) so they can resume next session.
+
+When resuming: "Last time we finished [phase name]. Ready to continue with [next phase name]?"
+
 ---
 
 ### Phase 1: Warm-Up and Rapport
@@ -24,6 +30,11 @@ This workflow uses a conversational approach grounded in Motivational Interviewi
 - Whether they relax and open up or stay guarded
 
 **Transition:** When the student is talking freely and seems comfortable, shift to deeper engagement questions.
+
+**Progress pulse:**
+
+    ━━━░░░░░░░░░░░░░░░░░ 15% through Discovery
+    🔓 Phase 1 complete: Warm-Up
 
 ---
 
@@ -47,6 +58,13 @@ When you detect a high-energy topic, go deeper: "Tell me more about that — wha
 
 **Transition:** When you have identified 1-3 activities or topics that genuinely energize the student.
 
+**Progress pulse:**
+
+    ━━━━━━░░░░░░░░░░░░░░ 33% through Discovery
+    🔓 Phase 2 complete: Flow Detection
+
+"That was great — we've identified what genuinely energizes you. Want to keep going into Strengths Mapping, or pick it up next time?"
+
 ---
 
 ### Phase 3: Strengths Mapping
@@ -69,6 +87,15 @@ When you detect a high-energy topic, go deeper: "Tell me more about that — wha
 **Reflect strengths back explicitly.** Many teens have never had their strengths named. "What you're describing — the way you organize your friend group and keep everyone on track — that's a real skill. There are entire career paths built around that."
 
 **Transition:** When you have a picture of 3-5 strengths, whether the student names them or you reflect them back.
+
+**Progress pulse:**
+
+    ━━━━━━━━━━░░░░░░░░░░ 50% through Discovery
+    🔓 Phase 3 complete: Strengths Mapping
+
+**Micro-summary:** Reflect back 1-2 strengths the student didn't recognize: "You might not think of [X] as a strength, but it absolutely is — and it connects to [flow activity]."
+
+"Halfway through! Want to continue with Values Clarification, or save this for next time?"
 
 ---
 
@@ -109,6 +136,13 @@ Then probe the top choices: "You picked [value]. Why does that matter to you?" (
 
 **Transition:** When you have a values profile (3-5 core values) and can start connecting dots between interests, strengths, and values.
 
+**Progress pulse:**
+
+    ━━━━━━━━━━━━━░░░░░░░ 66% through Discovery
+    🔓 Phase 4 complete: Values Clarification
+
+"We've got your interests, strengths, and values mapped. Two more phases to go — Possibility Expansion and Synthesis. Keep going?"
+
 ---
 
 ### Phase 5: Possibility Expansion
@@ -138,6 +172,13 @@ Frame assessments as data-gathering tools, not verdicts: "These aren't tests —
 
 **Transition:** When the student has 2-3 directions they are curious about exploring further.
 
+**Progress pulse:**
+
+    ━━━━━━━━━━━━━━━━░░░░ 83% through Discovery
+    🔓 Phase 5 complete: Possibility Expansion
+
+"Almost there — one more phase to pull it all together."
+
 ---
 
 ### Phase 6: Synthesis and Action Planning
@@ -152,6 +193,11 @@ Frame assessments as data-gathering tools, not verdicts: "These aren't tests —
 4. Suggest 1-3 concrete exploration actions — clubs to join, classes to try, people to talk to, assessments to take.
 
 **Frame everything as an experiment, not a commitment.** "Try this and see how it feels" is less intimidating than "start pursuing this career path." Interests will evolve — the goal is to start exploring, not to decide.
+
+**Progress pulse:**
+
+    ━━━━━━━━━━━━━━━━━━━━ 100% Discovery Complete!
+    🏆 Achievement unlocked: 🧬 Interest DNA
 
 ---
 
