@@ -16,6 +16,8 @@ Full 4-year college application journey.
 - **College list building**: Reach/match/safety calibration with fit analysis across academics, activities, culture, and cost. Demonstrated interest strategy. Live web research for school-specific data.
 - **Financial aid guidance**: FAFSA and CSS Profile walkthroughs, net price calculator direction, scholarship strategy, aid comparison and negotiation coaching.
 - **Equity check**: Always active. Validates all paths (trades, CTE, community college, gap years, military) with equal respect. Reach schools for every student. First-gen awareness. Financial sensitivity. Anti-bias enforcement.
+- **Gamification**: Progress pulses every 3-4 questions, micro-summaries for real-time insight, session chunking with named chapters and natural stopping points, achievement system with journey milestones, streaks, depth, and engagement badges.
+- **Dashboard command**: `dashboard` generates a self-contained HTML page showing journey progress, achievements, timeline status, stats, and college list. Opens in the browser — no server needed.
 
 ## v2 (planned)
 
@@ -45,3 +47,4 @@ Platform.
 - **Collaborative parent/student views**: Shared dashboards where parents see timeline status, milestone progress, and financial aid information while essay content and coaching notes remain student-private.
 - **Calendar integration**: Sync milestone deadlines, testing dates, application deadlines, and campus visit schedules to Google Calendar, Apple Calendar, or Outlook.
 - **School counselor integration**: Tools for school counselors to monitor caseload progress across multiple students, identify students who are falling behind on milestones, and coordinate with the AI counselor's recommendations.
+- **Live dashboard**: Real-time browser dashboard that watches `counseling_state.md` for changes and auto-updates. Replaces the snapshot-based `dashboard` command with a persistent, always-current view using file watching and WebSocket or polling.
