@@ -26,6 +26,10 @@ Say `kickoff`, share your grade level, and you're being counseled in under 2 min
 
 **Progress monitoring** -- Full milestone-by-milestone timeline checks, section-by-section assessment of the student's profile, and top priority actions based on grade level, season, and where the student is in the process. Coaching strategy adapts when something isn't working.
 
+**Gamification** -- Progress pulses show visual progress bars every few questions so students see they're getting somewhere, not just answering an endless Q&A. Long workflows break into named chapters with natural stopping points -- students opt in to more rather than enduring a marathon. Micro-summaries reflect insights back in real-time ("Interesting -- you keep coming back to building things and leading teams. That's a pattern."). An achievement system awards 19 badges across journey milestones, streaks, depth, and engagement categories. Completing milestones unlocks new capabilities and makes the next step feel like a reward, not a chore.
+
+**Visual dashboard** -- The `dashboard` command generates a self-contained HTML page and opens it in the browser. No server, no dependencies -- just a single file with your progress baked in. Shows your journey map (which commands you've completed), stats at a glance (track, GPA, spike strength, next milestone), achievement shelf (earned and locked badges), timeline status (color-coded milestones), and college list (reach/match/safety with strategy labels). Run `dashboard` anytime to refresh.
+
 ---
 
 ## Quick Start
@@ -104,6 +108,7 @@ Beacon will ask for your grade level, school, interests, and goals -- then build
 | Command | What It Does |
 |---------|-------------|
 | `review` | Full progress check -- milestone-by-milestone timeline status, section-by-section assessment, and top 3 priority actions based on your grade and where you are in the process. |
+| `dashboard` | See your progress visually -- opens a dashboard in your browser with your journey map, achievements, timeline, and stats. |
 | `help` | Command guide with context-aware recommendations based on where you are. |
 
 ---
@@ -180,6 +185,72 @@ Beacon checks whether you have a narrative thread (from `discover` and `activiti
 
 ---
 
+## Gamification & Dashboard
+
+Beacon keeps students engaged over a multi-year journey with lightweight gamification — no leaderboards, no competition, just personal progress tracking that makes the process feel rewarding.
+
+### Progress Pulses
+
+Long Q&A sessions break into chapters with visual progress:
+
+```
+━━━━━━━━━━░░░░░░░░░░ 50% through Discovery
+🔓 Phase 3 complete: Strengths Mapping
+
+"Halfway through! Want to continue with Values Clarification, or save this for next time?"
+```
+
+### Achievements
+
+19 badges earned by completing milestones, maintaining streaks, and going deep:
+
+```
+🚀 Launched        — Complete kickoff
+🧬 Interest DNA    — Complete all 6 phases of discovery
+📐 Track Set       — Choose your academic track
+🎯 Spike Found     — Identify your focus area
+📊 Score Check     — Testing plan in place
+🏫 List Built      — College list complete (reach/match/safety)
+📝 Story Seed      — Personal statement theme found
+🔥 Momentum x3    — 3 sessions in a row
+⬆️ Level Up        — Activity reaches state-level recognition
+🎓 Full Picture    — Application tells a cohesive story
+...and 9 more
+```
+
+### Visual Dashboard
+
+Type `dashboard` to open a browser-based progress page:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Maya Chen                              12 Sessions  4🔥│
+│  Grade 11 · Westfield High School                       │
+│                                                         │
+│  Journey Map                                            │
+│  🟢 Kickoff → 🟢 Discover → 🟢 Plan → 🟢 Activities   │
+│  → 🔵 Testing → 🟢 Schools → 🔵 Essays → ⚪ Apply     │
+│  → 🔵 Financial → 🔵 Summer                            │
+│                                                         │
+│  At a Glance                                            │
+│  Track: Engineering    GPA: 3.82 / 4.3 W                │
+│  Spike: [Robotics] [Human-Centered Design]              │
+│  ████████████████░░░░ State-level                       │
+│                                                         │
+│  Achievements (10/19)                                   │
+│  🚀 🧬 📐 🎯 📊 🏫 📝 🔥 ⬆️ 📋  🔒🔒🔒🔒🔒🔒🔒🔒🔒  │
+│                                                         │
+│  College List                                           │
+│  Reach: MIT (EA) · Olin (ED)                            │
+│  Match: Purdue (EA) · UMich (EA) · RPI (EA)            │
+│  Safety: UConn (RD) · WPI (EA)                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+The dashboard is a self-contained HTML file -- no server, no dependencies. It reads your `counseling_state.md` data, renders it with clean CSS (dark mode supported, mobile-friendly), and opens in your default browser. Run `dashboard` again anytime to refresh with your latest progress.
+
+---
+
 ## How It Works
 
 **Session state** -- Beacon maintains a persistent `counseling_state.md` file that tracks your profile, interest discovery results, academic track, activities, testing, college list, essay progress, financial aid status, summer plans, recommendations, timeline milestones, coaching notes, and active counseling strategy. At the start of each session, it reads this file and picks up where you left off. Saves happen automatically after every major workflow -- not just at session end.
@@ -216,7 +287,9 @@ beacon/
 ├── README.md                           # This file
 ├── VERSIONS.md                         # Version roadmap
 ├── LICENSE                             # MIT License
+├── dashboard-template.html             # Dashboard HTML template (used by the dashboard command)
 ├── counseling_state.md                 # Created on first kickoff (persistent memory, auto-saved)
+├── dashboard.html                      # Generated by dashboard command (gitignored, student-specific)
 └── references/
     ├── commands/                       # Per-command workflows (loaded on demand)
     │   ├── kickoff.md
@@ -230,6 +303,7 @@ beacon/
     │   ├── financial.md
     │   ├── summer.md
     │   ├── review.md
+    │   ├── dashboard.md
     │   └── help.md
     ├── cross-cutting.md                # Shared modules: spike development, narrative threading, equity check, MI techniques
     ├── academic-tracks.md              # Track definitions, course sequences, activity recommendations
