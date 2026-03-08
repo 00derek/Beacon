@@ -43,26 +43,21 @@ cd beacon
 
 Or download it as a ZIP and unzip.
 
-2. Activate Beacon for your AI tool:
 
-```bash
-# Claude Code
-cp SKILL.md CLAUDE.md
-
-# Gemini CLI
-cp SKILL.md GEMINI.md
-
-# OpenAI Codex CLI
-cp SKILL.md AGENTS.md
-```
-
-3. Open the folder in your AI tool and say `kickoff`.
+2. Open the folder in your AI tool and say `kickoff`.
 
 Requires a paid plan for your chosen AI tool. Works with Claude Code, Gemini CLI, OpenAI Codex CLI, Cursor, or any AI coding environment with file system access.
 
 ---
 
-Beacon will ask for your grade level, school, interests, and goals -- then build your profile, check your timeline, and give you a prioritized action plan. Everything saves automatically to `counseling_state.md` so you pick up where you left off next session.
+Beacon will ask for your grade level, school, interests, and goals -- then build your profile, check your timeline, and give you a prioritized action plan. Everything saves automatically to `counseling_state.md` so you pick up where you left off next session.  Anyone of these would work in the `beacon/` directory
+
+```bash
+claude
+codex
+gemini
+```
+
 
 ---
 
