@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beacon — Student Dashboard</title>
+<style>
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --bg-surface: #f5f5f7;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --border: #e0e0e0;
+  --accent: #4361ee;
+  --green: #2ec4b6;
+  --yellow: #e9c46a;
+  --red: #e76f51;
+  --blue: #4361ee;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a2e;
+    --bg-surface: #22223a;
+    --bg-card: #2a2a44;
+    --text-primary: #e8e8e8;
+    --text-secondary: #b0b0b0;
+    --text-muted: #777;
+    --border: #3a3a55;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.3);
+  }
+}
+
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 16px; color: var(--text-primary); }
+h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-info h1 { margin-bottom: 4px; }
+.header-info .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.header-stats {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.stat-block {
+  text-align: center;
+}
+.stat-block .stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.stat-block .stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.last-updated {
+  width: 100%;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ============================================================
+   Journey Map
+   ============================================================ */
+.journey-map-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.journey-map {
+  display: flex;
+  align-items: center;
+  min-width: 700px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.journey-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.journey-node .node-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--border);
+  transition: background 0.2s;
+  position: relative;
+}
+
+.journey-node.complete .node-circle { background: var(--green); }
+.journey-node.in-progress .node-circle { background: var(--blue); box-shadow: 0 0 0 4px rgba(67,97,238,0.2); }
+.journey-node.not-started .node-circle { background: var(--border); color: var(--text-muted); }
+
+.journey-node .node-circle .checkmark { font-size: 1rem; }
+
+.journey-node .node-label {
+  margin-top: 8px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.journey-line {
+  position: absolute;
+  top: 34px;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.journey-line-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ============================================================
+   Stats Grid
+   ============================================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stats-grid .stat-item {
+  padding: 16px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+}
+
+.stats-grid .stat-item .stat-item-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stats-grid .stat-item .stat-item-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.spike-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.spike-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.strength-bar-container {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.strength-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.strength-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Achievement Shelf
+   ============================================================ */
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.achievement-item {
+  text-align: center;
+  padding: 16px 8px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  transition: transform 0.15s;
+}
+
+.achievement-item:not(.locked):hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.achievement-item .achievement-emoji {
+  font-size: 1.75rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.achievement-item .achievement-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.achievement-item .achievement-date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.achievement-item.locked {
+  opacity: 0.4;
+}
+
+.achievement-item.locked .achievement-emoji {
+  filter: grayscale(1);
+}
+
+/* ============================================================
+   Timeline
+   ============================================================ */
+.timeline-list {
+  list-style: none;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.timeline-dot.ahead { background: var(--green); }
+.timeline-dot.on-track { background: var(--blue); }
+.timeline-dot.coming-up { background: var(--yellow); }
+.timeline-dot.behind { background: var(--red); }
+
+.timeline-content { flex: 1; }
+
+.timeline-milestone {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.timeline-status {
+  display: inline-block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.timeline-status.ahead { background: rgba(46,196,182,0.15); color: var(--green); }
+.timeline-status.on-track { background: rgba(67,97,238,0.15); color: var(--blue); }
+.timeline-status.coming-up { background: rgba(233,196,106,0.2); color: #b8960a; }
+.timeline-status.behind { background: rgba(231,111,81,0.15); color: var(--red); }
+
+@media (prefers-color-scheme: dark) {
+  .timeline-status.coming-up { color: var(--yellow); }
+}
+
+.timeline-notes {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   College List
+   ============================================================ */
+.college-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.college-column h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.college-column.reach h3 { border-bottom-color: var(--red); }
+.college-column.match h3 { border-bottom-color: var(--blue); }
+.college-column.safety h3 { border-bottom-color: var(--green); }
+
+.college-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.9rem;
+}
+
+.college-item + .college-item {
+  border-top: 1px solid var(--border);
+}
+
+.college-strategy {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  .container { padding: 16px 12px 36px; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; }
+
+  .header { flex-direction: column; }
+  .header-stats { justify-content: flex-start; }
+
+  .stats-grid { grid-template-columns: 1fr; }
+  .college-columns { grid-template-columns: 1fr; gap: 24px; }
+
+  .achievement-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  .achievement-item { padding: 12px 6px; }
+  .achievement-item .achievement-emoji { font-size: 1.4rem; }
+  .achievement-item .achievement-name { font-size: 0.72rem; }
+}
+
+@media (max-width: 480px) {
+  .header-stats { gap: 14px; }
+  .stat-block .stat-value { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<!-- BEACON_DATA -->
+
+<!-- Fallback sample data for standalone preview (ignored when BEACON_DATA is injected above) -->
+<script>
+window.BEACON_DATA = window.BEACON_DATA || {
+  profile: {
+    name: "Sample Student",
+    grade: "11",
+    school: "Lincoln High School",
+    gpaUnweighted: "3.7",
+    gpaWeighted: "4.1",
+    counselorStyle: "Guide",
+    currentSemester: "Spring",
+    targetGradYear: "2027"
+  },
+  sessionStats: {
+    totalSessions: 7,
+    currentStreak: 3,
+    longestStreak: 5,
+    lastSessionDate: "2026-03-05"
+  },
+  journeyProgress: {
+    kickoff: "complete",
+    discover: "complete",
+    plan: "complete",
+    activities: "in-progress",
+    testing: "not-started",
+    schools: "not-started",
+    essays: "not-started",
+    apply: "not-started",
+    financial: "not-started",
+    summer: "not-started"
+  },
+  achievements: [
+    { emoji: "\u{1F680}", name: "Launched", description: "You've started your college journey", date: "2026-01-15" },
+    { emoji: "\u{1F9EC}", name: "Interest DNA", description: "Your interest profile is mapped", date: "2026-02-01" },
+    { emoji: "\u{1F4D0}", name: "Track Set", description: "Your academic direction is locked in", date: "2026-02-20" },
+    { emoji: "\u{1F525}", name: "Momentum x3", description: "You're building momentum", date: "2026-03-01" }
+  ],
+  timeline: [
+    { milestone: "Interest exploration complete", status: "ahead", notes: "Finished early" },
+    { milestone: "Academic track mapped", status: "on-track", notes: "" },
+    { milestone: "PSAT registration", status: "coming-up", notes: "October deadline" },
+    { milestone: "Build initial college list", status: "coming-up", notes: "" },
+    { milestone: "Start test prep", status: "behind", notes: "Should have started last semester" }
+  ],
+  spike: {
+    areas: ["Robotics", "Engineering"],
+    strength: "School-level, working toward State"
+  },
+  collegeList: {
+    reach: [{ name: "MIT", strategy: "EA" }, { name: "Stanford", strategy: "REA" }],
+    match: [{ name: "Purdue", strategy: "EA" }, { name: "Virginia Tech", strategy: "EA" }],
+    safety: [{ name: "State University", strategy: "RD" }]
+  },
+  essays: {
+    personalStatement: { status: "not started", theme: "" },
+    supplementals: []
+  }
+};
+</script>
+
+<div class="container" id="app">
+  <!-- Rendered by JS -->
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===========================================================
+     Achievement Catalog
+     =========================================================== */
+  var ALL_ACHIEVEMENTS = [
+    { emoji: "\u{1F680}", name: "Launched" },
+    { emoji: "\u{1F9EC}", name: "Interest DNA" },
+    { emoji: "\u{1F4D0}", name: "Track Set" },
+    { emoji: "\u{1F3AF}", name: "Spike Found" },
+    { emoji: "\u{1F4CA}", name: "Score Check" },
+    { emoji: "\u{1F3EB}", name: "List Built" },
+    { emoji: "\u{1F4DD}", name: "Story Seed" },
+    { emoji: "\u{1F4EC}", name: "App Ready" },
+    { emoji: "\u{1F4B0}", name: "Money Smart" },
+    { emoji: "\u2600\uFE0F", name: "Summer Planned" },
+    { emoji: "\u{1F525}", name: "Momentum x3" },
+    { emoji: "\u{1F525}", name: "Momentum x5" },
+    { emoji: "\u{1F525}", name: "Momentum x10" },
+    { emoji: "\u2B06\uFE0F", name: "Level Up" },
+    { emoji: "\u{1F3C6}", name: "Top Tier" },
+    { emoji: "\u270D\uFE0F", name: "Draft Done" },
+    { emoji: "\u{1F393}", name: "Full Picture" },
+    { emoji: "\u{1F504}", name: "Fresh Eyes" },
+    { emoji: "\u{1F4CB}", name: "Check-In Pro" }
+  ];
+
+  var JOURNEY_COMMANDS = [
+    { key: "kickoff", label: "Kickoff" },
+    { key: "discover", label: "Discover" },
+    { key: "plan", label: "Plan" },
+    { key: "activities", label: "Activities" },
+    { key: "testing", label: "Testing" },
+    { key: "schools", label: "Schools" },
+    { key: "essays", label: "Essays" },
+    { key: "apply", label: "Apply" },
+    { key: "financial", label: "Financial" },
+    { key: "summer", label: "Summer" }
+  ];
+
+  var STATUS_ORDER = ["ahead", "on-track", "coming-up", "behind"];
+
+  /* ===========================================================
+     Helpers
+     =========================================================== */
+  function esc(str) {
+    if (!str) return "";
+    var d = document.createElement("div");
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return "";
+    var parts = dateStr.split("-");
+    if (parts.length !== 3) return esc(dateStr);
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return months[parseInt(parts[1], 10) - 1] + " " + parseInt(parts[2], 10) + ", " + parts[0];
+  }
+
+  function strengthPercent(str) {
+    if (!str) return 0;
+    var s = str.toLowerCase();
+    if (s.indexOf("national") !== -1 || s.indexOf("international") !== -1) return 100;
+    if (s.indexOf("state") !== -1) return 75;
+    if (s.indexOf("regional") !== -1) return 60;
+    if (s.indexOf("school") !== -1) return 40;
+    if (s.indexOf("classroom") !== -1 || s.indexOf("beginner") !== -1) return 20;
+    return 30;
+  }
+
+  /* ===========================================================
+     Render
+     =========================================================== */
+  function render() {
+    var d = window.BEACON_DATA;
+    if (!d) { document.getElementById("app").innerHTML = "<p>No data available.</p>"; return; }
+
+    var p = d.profile || {};
+    var ss = d.sessionStats || {};
+    var jp = d.journeyProgress || {};
+    var ach = d.achievements || [];
+    var tl = d.timeline || [];
+    var sp = d.spike || {};
+    var cl = d.collegeList;
+
+    var html = "";
+
+    /* --- Header --- */
+    html += '<header class="header">';
+    html += '<div class="header-info">';
+    html += '<h1>' + esc(p.name || "Student") + '</h1>';
+    html += '<div class="subtitle">Grade ' + esc(p.grade || "—") + ' &middot; ' + esc(p.school || "—") + '</div>';
+    html += '</div>';
+    html += '<div class="header-stats">';
+    html += '<div class="stat-block"><div class="stat-value">' + (ss.totalSessions != null ? ss.totalSessions : "—") + '</div><div class="stat-label">Sessions</div></div>';
+    html += '<div class="stat-block"><div class="stat-value">' + (ss.currentStreak != null ? ss.currentStreak : "0") + '</div><div class="stat-label">Streak</div></div>';
+    html += '</div>';
+    html += '<div class="last-updated">Last updated: ' + (ss.lastSessionDate ? formatDate(ss.lastSessionDate) : "—") + '</div>';
+    html += '</header>';
+
+    /* --- Journey Map --- */
+    var completeCount = 0;
+    var inProgressIdx = -1;
+    JOURNEY_COMMANDS.forEach(function (cmd, i) {
+      var st = jp[cmd.key] || "not-started";
+      if (st === "complete") completeCount = i + 1;
+      if (st === "in-progress" && inProgressIdx === -1) inProgressIdx = i;
+    });
+    var fillPct = 0;
+    var totalSegments = JOURNEY_COMMANDS.length - 1;
+    if (totalSegments > 0) {
+      var filledTo = inProgressIdx !== -1 ? inProgressIdx : completeCount;
+      fillPct = Math.round((filledTo / totalSegments) * 100);
+    }
+
+    html += '<section>';
+    html += '<h2>Journey Map</h2>';
+    html += '<div class="card">';
+    html += '<div class="journey-map-wrapper">';
+    html += '<div class="journey-map" style="position:relative">';
+    html += '<div class="journey-line"><div class="journey-line-fill" style="width:' + fillPct + '%"></div></div>';
+    JOURNEY_COMMANDS.forEach(function (cmd) {
+      var st = jp[cmd.key] || "not-started";
+      var icon = st === "complete" ? '<span class="checkmark">&#10003;</span>' : (st === "in-progress" ? "&#9679;" : "");
+      html += '<div class="journey-node ' + st + '">';
+      html += '<div class="node-circle">' + icon + '</div>';
+      html += '<div class="node-label">' + esc(cmd.label) + '</div>';
+      html += '</div>';
+    });
+    html += '</div></div></div></section>';
+
+    /* --- Stats Block --- */
+    var academicTrack = "";
+    if (p.counselorStyle && p.counselorStyle !== "Guide") {
+      academicTrack = p.counselorStyle;
+    }
+    var gpaDisplay = "";
+    if (p.gpaUnweighted) {
+      gpaDisplay = p.gpaUnweighted;
+      if (p.gpaWeighted) gpaDisplay += " / " + p.gpaWeighted + " W";
+    }
+
+    html += '<section>';
+    html += '<h2>At a Glance</h2>';
+    html += '<div class="card"><div class="stats-grid">';
+
+    html += '<div class="stat-item"><div class="stat-item-label">Academic Track</div><div class="stat-item-value">' + (academicTrack ? esc(academicTrack) : '<span style="color:var(--text-muted)">Not yet set</span>') + '</div></div>';
+    html += '<div class="stat-item"><div class="stat-item-label">GPA</div><div class="stat-item-value">' + (gpaDisplay ? esc(gpaDisplay) : '<span style="color:var(--text-muted)">—</span>') + '</div></div>';
+
+    html += '<div class="stat-item" style="grid-column:1/-1"><div class="stat-item-label">Spike Areas</div>';
+    if (sp.areas && sp.areas.length > 0) {
+      html += '<div class="spike-areas">';
+      sp.areas.forEach(function (a) { html += '<span class="spike-tag">' + esc(a) + '</span>'; });
+      html += '</div>';
+      if (sp.strength) {
+        var pct = strengthPercent(sp.strength);
+        html += '<div class="strength-bar-container">';
+        html += '<div class="strength-bar"><div class="strength-bar-fill" style="width:' + pct + '%"></div></div>';
+        html += '<div class="strength-label">' + esc(sp.strength) + '</div>';
+        html += '</div>';
+      }
+    } else {
+      html += '<div class="stat-item-value" style="color:var(--text-muted)">Not yet identified</div>';
+    }
+    html += '</div>';
+
+    /* Next milestone */
+    var nextMilestone = null;
+    for (var mi = 0; mi < tl.length; mi++) {
+      var mst = tl[mi].status;
+      if (mst === "coming-up" || mst === "behind" || mst === "on-track") { nextMilestone = tl[mi]; break; }
+    }
+    html += '<div class="stat-item" style="grid-column:1/-1"><div class="stat-item-label">Next Milestone</div><div class="stat-item-value">' + (nextMilestone ? esc(nextMilestone.milestone) : '<span style="color:var(--text-muted)">None</span>') + '</div></div>';
+
+    html += '</div></div></section>';
+
+    /* --- Achievement Shelf --- */
+    var earnedMap = {};
+    ach.forEach(function (a) { earnedMap[a.name] = a; });
+
+    html += '<section>';
+    html += '<h2>Achievements</h2>';
+    html += '<div class="card"><div class="achievement-grid">';
+    ALL_ACHIEVEMENTS.forEach(function (cat) {
+      var earned = earnedMap[cat.name];
+      if (earned) {
+        html += '<div class="achievement-item">';
+        html += '<span class="achievement-emoji">' + earned.emoji + '</span>';
+        html += '<div class="achievement-name">' + esc(earned.name) + '</div>';
+        html += '<div class="achievement-date">' + formatDate(earned.date) + '</div>';
+        html += '</div>';
+      } else {
+        html += '<div class="achievement-item locked">';
+        html += '<span class="achievement-emoji">' + cat.emoji + ' \u{1F512}</span>';
+        html += '<div class="achievement-name">' + esc(cat.name) + '</div>';
+        html += '<div class="achievement-date">Locked</div>';
+        html += '</div>';
+      }
+    });
+    html += '</div></div></section>';
+
+    /* --- Timeline --- */
+    if (tl.length > 0) {
+      /* Sort by status order */
+      var sorted = tl.slice().sort(function (a, b) {
+        return STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status);
+      });
+
+      html += '<section>';
+      html += '<h2>Timeline</h2>';
+      html += '<div class="card"><ul class="timeline-list">';
+      sorted.forEach(function (item) {
+        html += '<li class="timeline-item">';
+        html += '<div class="timeline-dot ' + esc(item.status) + '"></div>';
+        html += '<div class="timeline-content">';
+        html += '<span class="timeline-milestone">' + esc(item.milestone) + '</span>';
+        html += '<span class="timeline-status ' + esc(item.status) + '">' + esc(item.status.replace("-", " ")) + '</span>';
+        if (item.notes) html += '<div class="timeline-notes">' + esc(item.notes) + '</div>';
+        html += '</div></li>';
+      });
+      html += '</ul></div></section>';
+    }
+
+    /* --- College List --- */
+    var hasCollege = cl && ((cl.reach && cl.reach.length) || (cl.match && cl.match.length) || (cl.safety && cl.safety.length));
+    if (hasCollege) {
+      html += '<section>';
+      html += '<h2>College List</h2>';
+      html += '<div class="card"><div class="college-columns">';
+
+      var cols = [
+        { key: "reach", label: "Reach", cls: "reach" },
+        { key: "match", label: "Match", cls: "match" },
+        { key: "safety", label: "Safety", cls: "safety" }
+      ];
+      cols.forEach(function (col) {
+        var items = (cl[col.key] || []);
+        html += '<div class="college-column ' + col.cls + '">';
+        html += '<h3>' + col.label + '</h3>';
+        if (items.length === 0) {
+          html += '<div style="color:var(--text-muted);font-size:0.85rem">None yet</div>';
+        } else {
+          items.forEach(function (c) {
+            html += '<div class="college-item">';
+            html += '<span>' + esc(c.name) + '</span>';
+            html += '<span class="college-strategy">' + esc(c.strategy) + '</span>';
+            html += '</div>';
+          });
+        }
+        html += '</div>';
+      });
+
+      html += '</div></div></section>';
+    }
+
+    document.getElementById("app").innerHTML = html;
+  }
+
+  /* ===========================================================
+     Initialize
+     =========================================================== */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", render);
+  } else {
+    render();
+  }
+})();
+</script>
+</body>
+</html>
