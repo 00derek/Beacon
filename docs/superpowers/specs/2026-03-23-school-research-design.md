@@ -42,13 +42,13 @@ Add a `research-school` command backed by a reference module that:
 
 ### During Kickoff
 
-After the student provides their school name (kickoff step 2):
+After the student answers "What school do you go to?" (Step 2: Profile Collection, question 2 in kickoff.md):
 
 1. Beacon says: "Great — let me look up [School Name] so I can give you school-specific recommendations. This'll take a moment."
 2. Beacon runs the research workflow (Phase 1-4, see Section 2). Target: under 60 seconds.
 3. Beacon reports a brief summary: "Found [School]'s course catalog, activities, and calendar. A few things I couldn't find — I'll ask you about those as we go."
-4. Beacon resumes kickoff at step 3 (GPA), now informed by school data
-5. When asking about current course load (step 5), Beacon can reference actual offerings: "I see Carlmont offers AP Physics C — are you taking that?"
+4. Beacon resumes kickoff at the next profile question (GPA — question 3 within Step 2), now informed by school data
+5. When asking about current course load (question 5 within Step 2), Beacon can reference actual offerings: "I see Carlmont offers AP Physics C — are you taking that?"
 
 **If the school profile file already exists** (e.g., from a prior student or a previous kickoff attempt), Beacon reads the existing file instead of re-researching. If the file is >6 months old, Beacon asks: "I have school data from [date] — want me to refresh it?"
 
@@ -122,6 +122,8 @@ If all searches return zero useful results (e.g., misspelled school name, no web
 3. Proceed with kickoff using the current conversational approach for all school-related questions
 4. The minimal profile still serves as a container for student-provided data added later
 
+**Tool unavailability**: If WebSearch or WebFetch tools are not available in the current environment, skip the research step entirely and proceed as if all categories returned "Not found" (same as complete failure path above).
+
 ---
 
 ## 3. School Profile File Format
@@ -133,10 +135,10 @@ If all searches return zero useful results (e.g., misspelled school name, no web
 **Slug generation rules** (deterministic):
 1. Take the school name as provided by the student
 2. Lowercase all characters
-3. Replace spaces with hyphens
-4. Remove common suffixes: "school", "high school", "academy", "preparatory"
-5. Append the state abbreviation (lowercase) for disambiguation
-6. Strip any remaining non-alphanumeric characters (except hyphens)
+3. Strip trailing suffixes in this order (longest first, trailing only): "preparatory school", "high school", "middle school", "academy", "preparatory", "school"
+4. Trim whitespace, replace spaces with hyphens
+5. Strip any remaining non-alphanumeric characters (except hyphens)
+6. Append the state abbreviation (lowercase) for disambiguation
 
 Examples:
 - "Carlmont High School" (CA) → `school-profile-carlmont-ca.md`
@@ -248,23 +250,25 @@ Sources: [list of URLs fetched]
    - Surface 2-3 upcoming/overdue milestones (now includes school dates)
    - Recommend next action
 
-3. **Grade-filtered surfacing**: Only dates relevant to the student's grade and track get copied into the student's Timeline Status in `counseling_state.md`. A new `Source` column distinguishes origin:
+3. **Grade-filtered surfacing**: Only dates relevant to the student's grade and track get copied into the student's Timeline Status in `counseling_state.md`. A new `Source` column is **added alongside** the existing `Notes` column (not replacing it):
 
 ```
-| Milestone | Expected | Status | Source |
-|-----------|----------|--------|--------|
-| PSAT Registration | 2026-09-15 | upcoming | timeline-engine |
-| Course Selection Opens | 2026-04-15 | !! 5 days | school-calendar |
-| AP Exam Sign-up Deadline | 2026-04-20 | !! 2 days | school-calendar |
+| Milestone | Expected | Status | Source | Notes |
+|-----------|----------|--------|--------|-------|
+| PSAT Registration | 2026-09-15 | upcoming | timeline-engine | |
+| Course Selection Opens | 2026-04-15 | !! 5 days | school-calendar | Register via student portal |
+| AP Exam Sign-up Deadline | 2026-04-20 | !! 2 days | school-calendar | See counselor for fee waivers |
 ```
 
-   The `Source` column is a new convention. Existing milestones from the timeline engine are tagged `timeline-engine`; school-specific dates are tagged `school-calendar`. The status column uses the existing timeline engine icons (`>>` ahead, `--` on-track, `..` coming-up, `!!` urgent).
+   The `Source` column is a new addition to the existing schema (`Milestone | Expected | Status | Notes` becomes `Milestone | Expected | Status | Source | Notes`). Existing milestones from the timeline engine are tagged `timeline-engine`; school-specific dates are tagged `school-calendar`. The status column uses the existing timeline engine icons (`>>` ahead, `--` on-track, `..` coming-up, `!!` urgent).
 
 4. **Proactive reminders**: During the session start milestone check, Beacon compares the current date against school Key Dates. Any date within 14 days gets `!!` status and is surfaced in the opening message — e.g., "Heads up — Carlmont's course selection window opens in 5 days. Want to finalize your course plan today?" This calculation happens in the session start protocol, not in the timeline engine itself.
 
 5. **Dashboard**: School dates appear on the dashboard timeline alongside universal milestones, visually distinguished (different color or tag)
 
-6. **Staleness**: Dates are school-year specific. At the start of a new school year (or on refresh), Beacon prompts to re-run research for updated calendar.
+6. **Staleness**: Two staleness triggers, checked independently:
+   - **Age-based**: If the school profile's "Last Updated" date is >6 months old, suggest a refresh at session start.
+   - **School-year boundary**: If the profile was last updated before August 1 of the current school year (i.e., data is from a prior school year), suggest a refresh — even if it's less than 6 months old. This catches spring-semester calendar data going stale when a new school year begins.
 
 ---
 
@@ -297,7 +301,7 @@ Sources: [list of URLs fetched]
 | File | Change |
 |------|--------|
 | `references/commands/kickoff.md` | After step 2 (school name), run blocking school research. Add logic to weave school data into subsequent questions, especially step 5 (current course load). |
-| `SKILL.md` | Add school profile to managed files list. Add `research-school` to command list. Update session-start protocol to read school profile after state (see Section 4). Add `school-profile-*.md` to gitignore instructions. Add mid-session save for school profile updates from student-provided URLs. Add `Source` column convention for Timeline Status. |
+| `SKILL.md` | Add school profile to managed files list. Add `research-school` to command list. Update session-start protocol to read school profile after state (see Section 4). Add `School Profile:` field to the Profile section of the `counseling_state.md` schema. Add `Source` column to Timeline Status schema. Add `school-profile-*.md` to gitignore instructions. Add mid-session save for school profile updates from student-provided URLs. |
 | `references/timeline-engine.md` | Add `Source` column convention (`timeline-engine` / `school-calendar`) for distinguishing milestone origins. Add guidance for merging school-specific dates during session start. Define 14-day `!!` urgency threshold for school dates. |
 | `references/commands/plan.md` | Check school profile for course availability before asking student. Only ask conversationally if data is missing or marked as a gap. |
 | `references/commands/activities.md` | Reference school profile's extracurriculars section when advising on activities strategy. |
