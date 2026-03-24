@@ -6,7 +6,7 @@ Load `references/counselor-styles.md` and apply the student's active style to al
 
 ### Trigger Modes
 
-**Automatic** — triggered during kickoff when a school name and state are captured. Run silently in the background without interrupting the kickoff conversation. Notify the student only when research completes or fails.
+**Automatic** — triggered during kickoff after the student provides their school name (Step 2, question 2 of kickoff). Runs as a blocking step with a brief progress message ("Let me look up [School] so I can give you school-specific recommendations") before resuming kickoff.
 
 **On-demand** — triggered explicitly by the student (three modes):
 1. No args / "Research my school" / "Update my school profile" → full re-research
@@ -27,14 +27,14 @@ Before running any searches, complete these checks in order:
 4. Strip non-alphanumeric characters (except hyphens)
 5. Append state abbreviation (lowercase) with a hyphen
 
-Filename format: `school-profile-[slug]-[state].md`
+Filename format: `school-profile-[slug].md`
 
 Examples:
 - "Carlmont High School" (CA) → `school-profile-carlmont-ca.md`
 - "Thomas Jefferson Academy" (VA) → `school-profile-thomas-jefferson-va.md`
 - "Phillips Exeter Preparatory School" (NH) → `school-profile-phillips-exeter-nh.md`
 
-**2. File existence check** — Look for an existing `school-profile-[slug]-[state].md` file.
+**2. File existence check** — Look for an existing `school-profile-[slug].md` file.
 
 - If the file exists, proceed to the staleness check.
 - If no file exists, proceed directly to Step 1: Discovery.
@@ -117,7 +117,7 @@ Count totals. Determine overall research quality:
 
 ### Step 5: Write School Profile File
 
-Write the school profile to `school-profile-[slug]-[state].md`. Use this exact template:
+Write the school profile to `school-profile-[slug].md`. Use this exact template:
 
 ```markdown
 # School Profile: [Full School Name] ([State])
@@ -309,7 +309,7 @@ When the student requests a full re-research (e.g., "Re-research my school" / "U
 After the profile file is written, add a reference to it in the **Profile** section of `counseling_state.md`:
 
 ```
-School Profile: school-profile-[slug]-[state].md
+School Profile: school-profile-[slug].md
 ```
 
 Also log the research run in the **Session Log**:
