@@ -8,10 +8,10 @@ Load `references/counselor-styles.md` and apply the student's active style to al
 
 **Automatic** — triggered during kickoff when a school name and state are captured. Run silently in the background without interrupting the kickoff conversation. Notify the student only when research completes or fails.
 
-**On-demand** — triggered explicitly by the student:
-- "Research my school" / "Look up my school"
-- "Update my school profile"
-- "My school's website is [URL]"
+**On-demand** — triggered explicitly by the student (three modes):
+1. No args / "Research my school" / "Update my school profile" → full re-research
+2. With URL / "Here's our course catalog: [URL]" → fetch URL and update profile
+3. With category / "research-school calendar" / "Can you look up my school's calendar?" → re-research just that specific category
 
 ---
 
@@ -45,12 +45,12 @@ The profile is stale if either condition is true:
 - The last updated date is more than 6 months ago
 - The last updated date falls before August 1 of the current school year
 
-If stale, proceed to Step 1: Discovery to refresh the profile.
+If stale, ask the student: "I have school data from [date] — want me to refresh it, or use what I have?" If the student says yes, proceed to Step 1: Discovery. If the student says use existing, read the file and skip research. Continue with existing data regardless — the refresh can happen after the greeting.
 If current, skip research. Report: "I already have a current profile for [School Name] on file." Use the existing file for all school-specific recommendations.
 
 **4. Tool availability check** — Confirm WebSearch and WebFetch are available.
 
-If either tool is unavailable, skip all research steps. Create a minimal profile file with all categories marked "Not found — research tools unavailable at session time." Notify the student: "I wasn't able to research [School Name] right now — I'll try again next session. I've created a placeholder profile."
+If either tool is unavailable, skip all research steps. Create a minimal profile file with all categories marked "Not found — research tools unavailable at session time." Notify the student: "Web search isn't available right now — I'll ask you about your school as we go. If you have a link to your school's website, share it anytime."
 
 ---
 
@@ -120,20 +120,19 @@ Count totals. Determine overall research quality:
 Write the school profile to `school-profile-[slug]-[state].md`. Use this exact template:
 
 ```markdown
-# [School Name] — School Profile
+# School Profile: [Full School Name] ([State])
 
-**State:** [State]
-**Type:** [Public / Private / Charter / Magnet]
-**Enrollment:** [number or "Not found"]
-**Grade Span:** [e.g., 9-12]
-**Last Updated:** [YYYY-MM-DD]
-**Research Quality:** [Strong / Partial / Minimal]
-
----
+Last Updated: [today's date]
+Sources:
+- [URL 1]
+- [URL 2]
+- [...]
 
 ## School Overview
-
-[2-4 sentences: mission, accreditation, notable characteristics. "Not found" if unavailable.]
+- Type: [Public / Private / Charter]
+- Location: [City, State]
+- Enrollment: [number if found]
+- College-going rate: [percentage if found]
 
 ---
 
@@ -276,6 +275,21 @@ When the student provides a specific URL (e.g., "Here's my school's course catal
 4. Update the `Last Updated` date.
 5. Update the Research Gaps checklist.
 6. Report: "Thanks — I've updated your school profile with the information from that page. I now have [updated categories]."
+
+---
+
+### On-Demand: Category-Targeted Re-Research
+
+When the student requests research on a specific category (e.g., "research-school calendar" / "can you look up my school's calendar?"):
+
+1. Identify the requested category (one of the 8 defined categories: course catalog, course pathways & prerequisites, graduation requirements, staff directory, extracurriculars, special programs, key dates, school profile).
+2. Run a targeted search for that category only — use the relevant search query from Step 1: Discovery for that category.
+3. Fetch the most relevant result(s) for the category (budget: maximum 3 WebFetch calls).
+4. Extract data for that category only.
+5. Update only that section of the existing school profile file.
+6. Update the `Last Updated` date and Sources list.
+7. Update the Research Gaps checklist for that category.
+8. Report: "I've updated the [category name] section of your school profile."
 
 ---
 
