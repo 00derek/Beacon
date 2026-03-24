@@ -10,6 +10,8 @@ Ask the student to list every activity they are currently involved in. Collect o
 
 For each activity, ask:
 
+**If a school profile exists** (check `counseling_state.md` Profile section for School Profile reference): Read the Extracurriculars section. Use it to prompt the student about available opportunities they may not have mentioned: "I see [School] has a Robotics club and Science Olympiad — are you involved in either of those?" This helps surface activities the student might have forgotten or not considered. Don't list every club — focus on those aligned with the student's track and spike.
+
 1. "What's the activity?" (open-ended)
 2. "What's your role? (pick one)"
    1. Member / participant
@@ -76,6 +78,8 @@ Compare the student's activity profile against what their track and target schoo
 - **Authenticity gap**: Activities that look like resume padding. Gently probe: "You listed six activities. Which ones would you keep doing even if colleges didn't care?" The answer reveals what is authentic.
 
 **If gaps exist against track but the student has limited access** (rural area, low-income, no competitive programs nearby): Prioritize accessible alternatives — online competitions, virtual clubs, self-directed projects, local community initiatives. The equity check module applies here. Never assume the student has access to expensive programs or transportation to activities.
+
+**If a school profile exists with extracurriculars data**: Cross-reference gap recommendations against what the school actually offers. Don't suggest "join a robotics club" if the school doesn't have one. Instead, suggest starting one or finding an external alternative. Reference the school profile's Clubs, Athletics, Arts, and Competitions sections when making specific activity recommendations.
 
 ### Step 4: Strategy Recommendations
 
