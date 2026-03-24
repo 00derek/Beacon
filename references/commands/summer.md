@@ -8,6 +8,7 @@ Gather the information needed to make grade-appropriate, spike-aligned recommend
 
 1. "What grade are you in now — and what grade will you be going into next fall?" (determines which tier of programs and what kind of experience is appropriate)
 2. Pull from state: spike area(s), interest discovery results, academic track
+   Also pull from the school profile (if it exists): check the Special Programs section for dual enrollment partnerships, CTE pathways, and any school-affiliated summer programs. These are often overlooked but provide accessible, low-cost options. Reference them when making recommendations: "I see [School] has a dual enrollment partnership with [College] — that could be a great summer option for getting ahead on credits."
 3. "Has your family discussed a budget for summer programs? Some of the best programs are free, but others cost $5,000-8,000." (surface financial context without assuming)
 4. "What have you done in previous summers?" (pull from state if available — look for progression)
 5. "Is there anything you already know you want to do this summer?" (respect existing plans before recommending)

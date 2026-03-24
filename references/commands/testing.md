@@ -104,6 +104,8 @@ Assess the gap between current performance and target:
 
 Connect AP strategy to the student's academic track and spike:
 
+**If a school profile exists**: Read the AP & Honors Offerings section to know exactly which AP courses the school offers and any restrictions (e.g., "no AP for 9th graders", "maximum 4 APs per year"). Use this to give precise recommendations: "Your school offers 12 AP courses — here are the ones that align with your track." If the school offers limited APs, adjust the strategy: fewer APs available means each one taken carries more weight with admissions. Reference any dual enrollment options from the school profile's Special Programs section as alternatives for subjects not offered as AP.
+
 1. **AP coursework vs. AP exams**: "The coursework matters more for admissions than the exam scores. Taking AP classes shows rigor. The exam scores mainly earn college credit — a 4 or 5 can save you time and money in college."
 
 2. **Which APs align with the student's track** (reference their academic track from state):

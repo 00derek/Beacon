@@ -4,5 +4,8 @@ counseling_state.md
 # Generated dashboard (student-specific)
 dashboard.html
 
+# School profile (generated per school)
+school-profile-*.md
+
 .DS_Store
 .claude

@@ -2,7 +2,7 @@
 
 An AI college counselor that guides high school students through the complete 4-year college application journey — from freshman-year interest discovery through senior-year decisions.
 
-12 commands covering interest elicitation, academic planning, extracurricular spike strategy, standardized testing, college list building, Socratic essay coaching, application strategy, financial aid, and summer planning. Beacon uses Motivational Interviewing techniques, tracks milestones against a grade-aware timeline engine, and maintains persistent state across sessions so nothing falls through the cracks. Not a generic advice bot. An adaptive counselor that meets students where they are and gets sharper the longer you use it.
+13 commands covering interest elicitation, academic planning, extracurricular spike strategy, standardized testing, college list building, Socratic essay coaching, application strategy, financial aid, summer planning, and automated school research. Beacon uses Motivational Interviewing techniques, tracks milestones against a grade-aware timeline engine, and maintains persistent state across sessions so nothing falls through the cracks. Not a generic advice bot. An adaptive counselor that meets students where they are and gets sharper the longer you use it.
 
 Say `kickoff`, share your grade level, and you're being counseled in under 2 minutes.
 
@@ -12,7 +12,9 @@ Say `kickoff`, share your grade level, and you're being counseled in under 2 min
 
 **Interest discovery** -- Deep elicitation using Holland Code, flow activities, Ikigai, Gardner's Multiple Intelligences, and VIA Strengths frameworks. Helps students figure out what they're genuinely passionate about, not what they think they should be passionate about. Results feed directly into academic and activity planning.
 
-**Academic planning** -- Maps discovered interests to one of nine academic tracks (Engineering, CS, Pre-Med, Business, Law-Humanities, Psychology-Education, Arts-Design, Trades-CTE, Undecided) with a complete 4-year course sequence. Aligns course rigor with target schools and what the student's school actually offers.
+**School research** -- When a student provides their school name during kickoff, Beacon automatically researches the school's course catalog, AP/Honors offerings, extracurriculars, staff directory, graduation requirements, special programs, and academic calendar. Results save to a reusable school profile file that informs course planning, activity recommendations, and proactive date reminders. Students can refresh the data or provide URLs for missing information anytime.
+
+**Academic planning** -- Maps discovered interests to one of nine academic tracks (Engineering, CS, Pre-Med, Business, Law-Humanities, Psychology-Education, Arts-Design, Trades-CTE, Undecided) with a complete 4-year course sequence. Aligns course rigor with target schools and what the student's school actually offers — informed by the school profile data gathered during kickoff.
 
 **Spike strategy** -- Builds "well-lopsided" extracurricular profiles instead of well-rounded ones. Identifies 1-2 spike areas and guides students from participation to leadership to impact to recognition using a four-tier activity ranking system (National, State, School, Community).
 
@@ -76,6 +78,7 @@ gemini
 | `discover` | Deep interest exploration using proven frameworks (Holland Code, flow activities, strengths, values). Helps you figure out what you're genuinely passionate about. |
 | `plan` | Map your interests to an academic track and build a 4-year course sequence. Aligns course rigor with your goals and what your school offers. |
 | `activities` | Build your extracurricular strategy. Identify your "spike" -- the 1-2 areas where you go deep. Depth beats breadth in modern admissions. |
+| `research-school` | Look up your school's course catalog, activities, staff, calendar, and more. Runs automatically during kickoff -- use on-demand to refresh data or provide a URL for your school's website. |
 
 ### Testing & College Research
 
@@ -250,7 +253,7 @@ The dashboard is a self-contained HTML file -- no server, no dependencies. It re
 
 **Session state** -- Beacon maintains a persistent `counseling_state.md` file that tracks your profile, interest discovery results, academic track, activities, testing, college list, essay progress, financial aid status, summer plans, recommendations, timeline milestones, coaching notes, and active counseling strategy. At the start of each session, it reads this file and picks up where you left off. Saves happen automatically after every major workflow -- not just at session end.
 
-**Timeline engine** -- A milestone database organized by grade level and season (freshman fall through senior spring). Every session, Beacon checks your current position against the timeline and surfaces what's coming up, what's on track, and what needs attention. Recommendations are always grounded in where you actually are, not a generic checklist.
+**Timeline engine** -- A milestone database organized by grade level and season (freshman fall through senior spring). Every session, Beacon checks your current position against the timeline and surfaces what's coming up, what's on track, and what needs attention. School-specific dates (course selection deadlines, AP sign-ups) from the school profile are merged into the timeline and surfaced proactively when within 14 days. Recommendations are always grounded in where you actually are, not a generic checklist.
 
 **Socratic approach** -- Beacon never writes application content for the student. Essays, activity descriptions, and personal statements are guided through questions. Anonymized strong examples are available for illustration, but the student's voice stays their own. This is enforced as a non-negotiable operating rule.
 
@@ -285,6 +288,7 @@ beacon/
 ├── dashboard-template.html             # Dashboard HTML template (used by the dashboard command)
 ├── counseling_state.md                 # Created on first kickoff (persistent memory, auto-saved)
 ├── dashboard.html                      # Generated by dashboard command (gitignored, student-specific)
+├── school-profile-*.md                 # Generated per school (gitignored, reusable across students)
 └── references/
     ├── commands/                       # Per-command workflows (loaded on demand)
     │   ├── kickoff.md
@@ -298,6 +302,7 @@ beacon/
     │   ├── financial.md
     │   ├── summer.md
     │   ├── review.md
+    │   ├── research-school.md
     │   ├── dashboard.md
     │   └── help.md
     ├── cross-cutting.md                # Shared modules: spike development, narrative threading, equity check, MI techniques

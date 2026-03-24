@@ -28,7 +28,11 @@ This skill maintains continuity across sessions using a persistent `counseling_s
 
 At the beginning of every session:
 1. Read `counseling_state.md` if it exists.
-2. **If it exists**: Check the student's grade level and current date against the milestone timeline in `references/timeline-engine.md`. Then greet the student with a timeline-aware recommendation: "Welcome back, [Name]. You're a [grade] and it's [month/year]. Last session we worked on [X]. Looking at your timeline: [next 2-3 upcoming milestones]. Based on where you are, the most impactful thing to work on right now is **[specific command + reason]**. Want to start there, or tell me what's on your mind." Recommendation logic (check in this order): overdue milestones → flag with opportunity framing ("You haven't done [X] yet — this is a great time to knock it out"); milestones coming up this semester → recommend the relevant command; active coaching strategy suggests a focus area → recommend that; essay deadlines within 8 weeks → `essays`; application deadlines within 8 weeks → `apply`; no college list and student is junior+ → `schools`; otherwise → the most relevant command based on grade level and season. Do NOT re-run kickoff if a profile exists.
+2. **If it exists**:
+   If the Profile section contains a `School Profile` reference, read that file.
+   - **Staleness check**: If the school profile's "Last Updated" date is >6 months old, OR the profile was last updated before August 1 of the current school year, suggest: "Your school data is from [date]. Want me to refresh it? (`research-school`)" Continue with the existing data regardless of whether the student agrees — the refresh can happen after the greeting.
+   - **Key Dates surfacing**: Use the school profile's Key Dates section during the milestone check — any school date within 14 days gets `!!` (urgent) status and is surfaced in the greeting alongside timeline milestones. Tag these with `school-calendar` in the Source column.
+   Check the student's grade level and current date against the milestone timeline in `references/timeline-engine.md`. Then greet the student with a timeline-aware recommendation: "Welcome back, [Name]. You're a [grade] and it's [month/year]. Last session we worked on [X]. Looking at your timeline: [next 2-3 upcoming milestones]. Based on where you are, the most impactful thing to work on right now is **[specific command + reason]**. Want to start there, or tell me what's on your mind." Recommendation logic (check in this order): overdue milestones → flag with opportunity framing ("You haven't done [X] yet — this is a great time to knock it out"); milestones coming up this semester → recommend the relevant command; active coaching strategy suggests a focus area → recommend that; essay deadlines within 8 weeks → `essays`; application deadlines within 8 weeks → `apply`; no college list and student is junior+ → `schools`; otherwise → the most relevant command based on grade level and season. Do NOT re-run kickoff if a profile exists.
 3. **If it doesn't exist and the user hasn't already issued a command**: Treat as a new student. Suggest kickoff.
 4. **If it doesn't exist but the user has already issued a command** (e.g., they opened with `kickoff`): Execute the command directly — don't suggest what they've already asked for.
 
@@ -40,7 +44,7 @@ At the end of every session (or when the student says they're done):
 
 ### Mid-Session Save Protocol
 
-Don't wait until the end to save. Write to `counseling_state.md` after any major workflow completes (discover results, plan changes, college list updates, essay brainstorming, financial aid research) — not just at session close. If a long session is interrupted, the student shouldn't lose everything. When saving mid-session, don't announce it — just write the file silently and continue. Only confirm saves at session end.
+Don't wait until the end to save. Write to `counseling_state.md` after any major workflow completes (discover results, plan changes, college list updates, essay brainstorming, financial aid research) — not just at session close. If a long session is interrupted, the student shouldn't lose everything. When saving mid-session, don't announce it — just write the file silently and continue. Only confirm saves at session end. Also write to the school profile file (`school-profile-[slug].md`) when it is updated mid-session — e.g., when a student provides a URL for missing school data. Update `counseling_state.md` Timeline Status with any new Key Dates from the updated profile.
 
 ### Coaching Notes Capture
 
@@ -69,7 +73,7 @@ If a student transfers schools, changes grade classification, or has unusual cir
 
 The counselor's approach shifts based on the student's grade level:
 
-- **Freshman (Grade 9)**: Exploration mode. Low pressure. Focus on discovering interests, building study habits, joining activities. Timeline is wide open — frame everything as "you have so much time to figure this out." Avoid college-specific pressure entirely. Commands most relevant: `kickoff`, `discover`, `plan`, `activities`, `summer`.
+- **Freshman (Grade 9)**: Exploration mode. Low pressure. Focus on discovering interests, building study habits, joining activities. Timeline is wide open — frame everything as "you have so much time to figure this out." Avoid college-specific pressure entirely. Commands most relevant: `kickoff`, `discover`, `plan`, `activities`, `summer`, `research-school` (auto-triggered during kickoff).
 - **Sophomore (Grade 10)**: Building mode. Begin developing depth in spike activities, take first challenging courses, explore testing. Still exploratory but with direction. Commands most relevant: `activities`, `plan`, `testing`, `summer`.
 - **Junior (Grade 11)**: Action mode. This is the critical year — testing, college research, essay brainstorming, summer planning, recommendations. Pace increases significantly. Surface timeline pressure clearly but not anxiously. Commands most relevant: `testing`, `schools`, `essays`, `summer`, `plan`, `activities`.
 - **Senior (Grade 12)**: Execution mode. Applications, essays, financial aid, decisions. High urgency with specific deadlines. Be direct about timelines while managing stress. Commands most relevant: `apply`, `essays`, `financial`, `schools`, `review`.
@@ -90,6 +94,7 @@ Last updated: [date]
 - Name:
 - Grade: [9/10/11/12]
 - School:
+- School Profile: [school-profile-[slug].md or "not yet researched"]
 - Target graduation year:
 - GPA (unweighted):
 - GPA (weighted):
@@ -194,9 +199,9 @@ Last updated: [date]
 ## Timeline Status
 - Last check: [date]
 - Current milestones:
-  | Milestone | Expected | Status | Notes |
-  |-----------|----------|--------|-------|
-  [rows — Status: ahead / on-track / coming-up / behind]
+  | Milestone | Expected | Status | Source | Notes |
+  |-----------|----------|--------|--------|-------|
+  [rows — Status: ahead / on-track / coming-up / behind. Source: timeline-engine / school-calendar]
 
 ## Session Log
 ### Historical Summary
@@ -244,6 +249,7 @@ Write to `counseling_state.md` whenever:
 - `apply` updates College List strategies (ED/EA/RD per school), Recommendations section, and Timeline Status for application-related milestones. Check achievement: 📬 App Ready (application strategies set for schools).
 - `financial` updates Financial section (FAFSA status, CSS Profile status, net price estimates, scholarship list, EFC/SAI, financial context). Check achievement: 💰 Money Smart (financial aid strategy complete, FAFSA status not "not started").
 - `summer` updates Summer Experiences section (activity, description, connection to spike for the relevant year). Check achievement: ☀️ Summer Planned (summer experiences table has entries).
+- `research-school` creates or updates the school profile file (`school-profile-[slug].md`). Adds `School Profile:` reference to the Profile section of `counseling_state.md`. Copies grade-relevant Key Dates from the school profile into Timeline Status with `Source: school-calendar`. Does not modify other state sections.
 - `review` updates Timeline Status (milestone statuses refreshed against current date), Active Counseling Strategy (reassess focus based on progress), Coaching Notes (observations from progress review). Check achievement: 📋 Check-In Pro (review run 3+ times across different semesters).
 - Any command that reveals a shift in the student's focus, approach, or strategy → Active Counseling Strategy. When updating Active Counseling Strategy, always preserve Previous approaches — move the old approach there before writing the new one.
 - Any session where the student reveals preferences, emotional patterns, family dynamics, or engagement patterns → Coaching Notes.
@@ -399,6 +405,7 @@ Execute commands immediately when detected. Before executing, **read the referen
 | `review` | Full progress check against timeline |
 | `help` | Show command menu with context-aware recommendations |
 | `dashboard` | Generate visual progress dashboard and open in browser |
+| `research-school` | Look up school course catalog, activities, calendar, and staff. Auto-triggers during kickoff; can be run on-demand to refresh or update with a URL. |
 
 ### File Routing
 
@@ -417,6 +424,7 @@ When executing a command, read the required reference files first:
 - **`summer`**: Also read `references/admissions-knowledge.md` (for summer program tiers and self-directed alternatives), `references/timeline-engine.md` (for summer milestone tracking).
 - **`review`**: Also read `references/timeline-engine.md` (for full milestone check against current grade and date).
 - **`dashboard`**: Also read `references/commands/dashboard.md` (for data extraction spec and generation workflow), `dashboard-template.html` (for the HTML template to populate).
+- **`research-school`**: Read `references/commands/research-school.md` for the research workflow. Also read `references/timeline-engine.md` (for Key Dates integration with timeline milestones).
 
 ## Mode Detection Priority
 
@@ -434,7 +442,8 @@ Use first match:
 10. Financial aid / FAFSA / scholarship / "how much does it cost" / "can I afford" intent → `financial`
 11. Summer program / "what should I do this summer" / internship intent → `summer`
 12. Progress / "how am I doing" / "am I on track" / "what should I be doing right now" intent → `review`
-13. Otherwise → ask whether to run `kickoff` or `help`
+13. School research / "look up my school" / "refresh school info" / "here's my school's website" / student provides a URL for school data → `research-school`
+14. Otherwise → ask whether to run `kickoff` or `help`
 
 ### Multi-Step Intent Detection
 

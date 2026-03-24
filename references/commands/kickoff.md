@@ -22,8 +22,11 @@ Collect one question at a time. Wait for each response before asking the next.
 
 1. "What's your name?"
 2. "What school do you go to?"
+
+   **After the student answers question 2**: Run the `research-school` workflow (see `references/commands/research-school.md`). This is a blocking step — tell the student "Let me look up [school] so I can give you school-specific recommendations" and run the research before continuing to question 3. Once research completes (or if skipped due to tool unavailability), resume with question 3.
+
 3. "Do you know your current GPA — both unweighted and weighted? It's fine if you only have one or aren't sure."
-4. "What classes are you taking right now?" (Capture the full course load — this reveals current rigor.)
+4. "What classes are you taking right now?" (Capture the full course load — this reveals current rigor. If the school profile exists and has a course catalog, cross-reference the student's courses against known offerings. If a student names a course not in the catalog, ask about it — the catalog may be incomplete. If the student seems unsure about available courses, reference the school profile: "I see [School] offers [courses] — are you taking any of those?")
 5. "What kind of counselor works best for you? (pick one)"
    1. Guide — I'll ask thoughtful questions and help you reflect on what you want
    2. Coach — Give me a game plan, hold me accountable, keep me on track
@@ -92,7 +95,7 @@ Flag any milestones from previous semesters that appear incomplete (using opport
 
 Write the full `counseling_state.md` file using the schema from CLAUDE.md. Populate:
 
-- **Profile**: All data collected in Steps 2-4 (name, grade, school, GPA, counselor style, directness, parent involvement, concerns, current semester based on date).
+- **Profile**: All data collected in Steps 2-4 (name, grade, school, GPA, counselor style, directness, parent involvement, concerns, current semester based on date). Include `School Profile: school-profile-[slug].md` if school research was run.
 - **Style Adaptation Log**: First entry — "[date]: Selected [style] during kickoff (directness [N])."
 - **Interest Discovery**: Initial snapshot from Step 3. Flow activities, strengths, and values as "not yet assessed" unless something concrete emerged. Holland Code as "not yet assessed."
 - **Timeline Status**: Current milestone statuses based on grade and date from Step 4.

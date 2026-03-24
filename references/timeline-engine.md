@@ -41,6 +41,15 @@ Hey [Name]! You're a [grade] in your [fall/spring] semester — here's where thi
 | `!!` | Behind |
 | `  ` | N/A |
 
+**Source tagging:**
+
+| Source | Meaning |
+|--------|---------|
+| `timeline-engine` | Universal milestone from the tables below |
+| `school-calendar` | School-specific date from the school profile |
+
+When displaying timeline items, include the source to help the student understand where dates come from. School-calendar items within 14 days of the current date automatically get `!!` (urgent) status regardless of their original categorization.
+
 ---
 
 ## Status Label Definitions
@@ -259,6 +268,10 @@ When the `review` command or session greeting runs a timeline check, output uses
 .. [Milestone] — [one-line action step]
 .. [Milestone] — [one-line action step]
 
+### School Dates (Next 30 Days)
+!! [School Date] — [event description] [school-calendar]
+.. [School Date] — [event description] [school-calendar]
+
 ### Behind (Opportunities to Catch Up)
 !! [Milestone] — [MI-framed encouragement + suggested next step]
 
@@ -305,7 +318,7 @@ Each milestone belongs to one of these categories. Categories help the counselor
 
 ## Integration Points
 
-**Loaded by:** `kickoff`, `plan`, `testing`, `apply`, `summer`, `review`
+**Loaded by:** `kickoff`, `plan`, `testing`, `apply`, `summer`, `review`, `research-school`
 
 **Trigger conditions:**
 - Every session greeting (read state, check grade + date, surface milestones)
@@ -317,3 +330,4 @@ Each milestone belongs to one of these categories. Categories help the counselor
 - `elicitation-frameworks.md` — the Exploration milestones map to the elicitation phases
 - `academic-tracks.md` — the Academics milestones reference track-specific course sequences
 - `admissions-knowledge.md` — the Applications and Schools milestones reference admissions timelines and strategy
+- `school-profile-[slug].md` — reads Key Dates section during session greeting; school dates within 14 days are surfaced as `!!` items alongside timeline milestones
