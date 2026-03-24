@@ -41,6 +41,7 @@ When the user types `help`, generate a context-aware command guide — not a sta
 | `discover` | Deep interest exploration using proven frameworks (Holland Code, flow activities, strengths, values). Helps you figure out what you're genuinely passionate about — not what you think you should be passionate about. |
 | `plan` | Map your interests to an academic track and build a 4-year course sequence. Aligns course rigor with your goals and what your school offers. |
 | `activities` | Build your extracurricular strategy. Identify your "spike" — the 1-2 areas where you go deep. Depth beats breadth in modern admissions. |
+| `research-school` | Look up your school's course catalog, activities, staff, calendar, and more. Runs automatically during kickoff — use this to refresh data or add a URL your school's website. |
 
 ### Testing & College Research
 | Command | What It Does |
@@ -94,6 +95,7 @@ If you're not sure which command to use, just tell me what's on your mind. Here'
 | "How do I actually apply?" | `apply` — we'll map out your strategy (ED, EA, RD) and manage deadlines |
 | "How do we pay for college?" | `financial` — we'll walk through FAFSA, scholarships, and financial aid |
 | "Am I on track? What should I be doing right now?" | `review` — we'll check your progress against the timeline for your grade |
+| "What courses does my school offer?" | `research-school` — we'll look up your school's catalog and offerings |
 
 ---
 
