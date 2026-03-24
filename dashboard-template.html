@@ -372,6 +372,20 @@ h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
 .timeline-status.coming-up { background: rgba(233,196,106,0.2); color: #b8960a; }
 .timeline-status.behind { background: rgba(231,111,81,0.15); color: var(--red); }
 
+.timeline-source {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+.timeline-source.school-calendar {
+  background: rgba(167,139,250,0.15);
+  color: #a78bfa;
+}
+@media (prefers-color-scheme: dark) {
+  .timeline-source.school-calendar { color: #c4b5fd; }
+}
+
 @media (prefers-color-scheme: dark) {
   .timeline-status.coming-up { color: var(--yellow); }
 }
@@ -499,11 +513,11 @@ window.BEACON_DATA = window.BEACON_DATA || {
     { emoji: "\u{1F525}", name: "Momentum x3", description: "You're building momentum", date: "2026-03-01" }
   ],
   timeline: [
-    { milestone: "Interest exploration complete", status: "ahead", notes: "Finished early" },
-    { milestone: "Academic track mapped", status: "on-track", notes: "" },
-    { milestone: "PSAT registration", status: "coming-up", notes: "October deadline" },
-    { milestone: "Build initial college list", status: "coming-up", notes: "" },
-    { milestone: "Start test prep", status: "behind", notes: "Should have started last semester" }
+    { milestone: "Interest exploration complete", status: "ahead", source: "timeline-engine", notes: "Finished early" },
+    { milestone: "Academic track mapped", status: "on-track", source: "timeline-engine", notes: "" },
+    { milestone: "Course selection opens", status: "coming-up", source: "school-calendar", notes: "Register via student portal" },
+    { milestone: "PSAT registration", status: "coming-up", source: "timeline-engine", notes: "October deadline" },
+    { milestone: "Start test prep", status: "behind", source: "timeline-engine", notes: "Should have started last semester" }
   ],
   spike: {
     areas: ["Robotics", "Engineering"],
@@ -742,6 +756,7 @@ window.BEACON_DATA = window.BEACON_DATA || {
         html += '<div class="timeline-content">';
         html += '<span class="timeline-milestone">' + esc(item.milestone) + '</span>';
         html += '<span class="timeline-status ' + esc(item.status) + '">' + esc(item.status.replace("-", " ")) + '</span>';
+        if (item.source === "school-calendar") html += '<span class="timeline-source school-calendar">school</span>';
         if (item.notes) html += '<div class="timeline-notes">' + esc(item.notes) + '</div>';
         html += '</div></li>';
       });
